@@ -1,0 +1,11 @@
+# Protect the calculator error log from direct HTTP access.
+# Works with Apache 2.4 (mod_authz_core) and falls back to Apache 2.2 syntax.
+<Files "calculator_errors.log">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</Files>
